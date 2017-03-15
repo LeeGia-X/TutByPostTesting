@@ -28,7 +28,7 @@ public class TestTutByPost {
         prop.load(new FileInputStream(PATH_TO_PROPERTIES));
         driver.get(prop.getProperty("url"));
         tutByPost.mainPage().mailLinkClick();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
         Assert.assertTrue(driver.getTitle().contains("TUT.BY | ВАША ПОЧТА ТУТ | Вход"));
         tutByPost.authorizationPagePage().mailAvtorization(prop.getProperty("username"),prop.getProperty("password"));
     }
@@ -37,9 +37,7 @@ public class TestTutByPost {
     public void loginPost() {
         tutByPost.mainPostPage().clickWriteLetterButton();
         tutByPost.messagePage().emailAndSubjectInput("Lee_X@mail.ru", "Test");
-
-
-
-
+        tutByPost.messagePage().fillMessageField("TestTutBy");
+        tutByPost.messagePage().clickSendButton();
     }
 }
