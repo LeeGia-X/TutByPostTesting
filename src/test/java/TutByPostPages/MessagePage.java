@@ -41,6 +41,9 @@ public class MessagePage {
     @FindBy(css = "button[data-action='save']")
     private WebElement saveButton;
 
+    @FindBy(css = ".mail-QuickReply-Placeholder_text")
+    private WebElement quickReplyPlaceholderText;
+
     public MessagePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, 40);
@@ -74,6 +77,13 @@ public class MessagePage {
 
     public void clickSaveButton(){
         saveButton.click();
+    }
+
+    public void answerLetter(String message){
+        wait.until(ExpectedConditions.visibilityOf(quickReplyPlaceholderText));
+        quickReplyPlaceholderText.click();
+        wait.until(ExpectedConditions.visibilityOf(messageField));
+        fillMessageField(message);
     }
 
 

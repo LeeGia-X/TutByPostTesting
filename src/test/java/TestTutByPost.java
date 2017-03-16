@@ -55,5 +55,12 @@ public class TestTutByPost {
     }
 
     @Test
-    public void answerLetter() {}
+    public void answerLetter() {
+        tutByPost.mainPostPage().findLetterByEmail("lee_x@mail.ru");
+        tutByPost.messagePage().answerLetter("AnswerTest");
+        tutByPost.messagePage().clickSendButton();
+        Assert.assertTrue(tutByPost.messagePage().notificationMessage.isDisplayed());
+    }
+
+
 }
