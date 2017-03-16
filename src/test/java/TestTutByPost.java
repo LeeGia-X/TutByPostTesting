@@ -1,9 +1,11 @@
 import TutByPostPages.TutByPost;
+import org.junit.Ignore;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.net.UrlChecker;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -24,20 +26,35 @@ public class TestTutByPost {
     Properties prop = new Properties();
 
     @BeforeTest
-    public void setUp() throws IOException {
-        prop.load(new FileInputStream(PATH_TO_PROPERTIES));
+    public void setUp() {
+        try {
+            prop.load(new FileInputStream(PATH_TO_PROPERTIES));
+        } catch (IOException e) {
+            System.out.println("Can't get properties");
+        }
         driver.get(prop.getProperty("url"));
-        tutByPost.mainPage().mailLinkClick();
-        driver.manage().timeouts().implicitlyWait(40, TimeUnit.SECONDS);
         Assert.assertTrue(driver.getTitle().contains("TUT.BY | ВАША ПОЧТА ТУТ | Вход"));
         tutByPost.authorizationPagePage().mailAvtorization(prop.getProperty("username"),prop.getProperty("password"));
+
+    }
+
+    @Ignore
+    public void sendLetter() {
+        tutByPost.mainPostPage().clickWriteLetterButton();
+        tutByPost.messagePage().letterWriting("lee_x@mail.ru", "Test","TestTutBy");
+        tutByPost.messagePage().clickSendButton();
+        Assert.assertTrue(tutByPost.messagePage().notificationMessage.isDisplayed());
     }
 
     @Test
-    public void loginPost() {
+    public void createDraft() {
         tutByPost.mainPostPage().clickWriteLetterButton();
-        tutByPost.messagePage().emailAndSubjectInput("Lee_X@mail.ru", "Test");
-        tutByPost.messagePage().fillMessageField("TestTutBy");
-        tutByPost.messagePage().clickSendButton();
+        tutByPost.messagePage().letterWriting("lee_x@mail.ru", "Test","TestTutBy");
+        tutByPost.messagePage().clickCloseMessageButton();
+        Assert.assertTrue(tutByPost.messagePage().confirmationWindow.isDisplayed());
+        tutByPost.messagePage().clickSaveButton();
     }
+
+    @Test
+    public void answerLetter() {}
 }

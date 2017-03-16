@@ -29,6 +29,18 @@ public class MessagePage {
     @FindBy(css = "._nb-action-button")
     private WebElement sendButton;
 
+    @FindBy(css = ".mail-Notification-Content")
+    public WebElement notificationMessage;
+
+    @FindBy(css = "div[title='Закрыть']")
+    private WebElement closeMessageButton;
+
+    @FindBy(css = "div[class='_nb-popup-i']")
+    public WebElement confirmationWindow;
+
+    @FindBy(css = "button[data-action='save']")
+    private WebElement saveButton;
+
     public MessagePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, 40);
@@ -36,22 +48,33 @@ public class MessagePage {
     }
 
     public void emailAndSubjectInput (String email, String subject){
-        //driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+
         wait.until(ExpectedConditions.visibilityOf(emailField));
         emailField.sendKeys(email);
         subjectField.sendKeys(subject);
     }
 
     public void fillMessageField(String message){
-        //wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".cke_contents_ltr")));
         wait.until(ExpectedConditions.visibilityOf(messageField));
-        //driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        //messageField.sendKeys(message);
-        //driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         messageField.sendKeys(message);
+    }
+
+    public void letterWriting(String email, String subject, String message){
+        emailAndSubjectInput(email, subject);
+        fillMessageField(message);
     }
 
     public void clickSendButton(){
         sendButton.click();
     }
+
+    public void clickCloseMessageButton(){
+        closeMessageButton.click();
+    }
+
+    public void clickSaveButton(){
+        saveButton.click();
+    }
+
+
 }

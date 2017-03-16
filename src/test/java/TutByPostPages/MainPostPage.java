@@ -17,6 +17,20 @@ public class MainPostPage {
     @FindBy(css = ".ns-view-toolbar-button-compose-go")
     private WebElement writeLetterButton;
 
+    @FindBy(linkText = "Черновики")
+    private WebElement draftsLink;
+
+    //<span class="mail-NestedList-Item-Name js-folders-item-name">Черновики</span>
+
+    @FindBy(css = ".mail-MessageSnippet-FromText")
+    private WebElement messageSnippetFromText;
+    //<span class="mail-MessageSnippet-FromText" title="lee_x@mail.ru">Ирина П</span>
+    @FindBy(css = ".mail-MessageSnippet-Item_subject")
+    private WebElement messageSnippetItemSubject;
+
+    @FindBy(css = ".mail-MessageSnippet-Item_firstline")
+    private WebElement messageSnippetItemFirstline;
+
     public MainPostPage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, 40);
@@ -24,7 +38,17 @@ public class MainPostPage {
     }
 
     public void clickWriteLetterButton(){
+        //wait.until(ExpectedConditions.urlContains("leex#inbox"));
         writeLetterButton.click();
         wait.until(ExpectedConditions.urlContains("leex#compose"));
+    }
+
+    public void clickDraftsLink(){
+        draftsLink.click();
+    }
+
+    public String getMessageSnippets(){
+        return messageSnippetFromText.getAttribute("title");
+
     }
 }

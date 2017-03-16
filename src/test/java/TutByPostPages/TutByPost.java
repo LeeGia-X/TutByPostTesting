@@ -12,7 +12,6 @@ public class TutByPost {
         this.driver = driver;
     }
 
-    public MainPage mainPage() {return new MainPage(driver);}
     public AuthorizationPage authorizationPagePage() {return new AuthorizationPage(driver);}
     public MainPostPage mainPostPage() {return new MainPostPage(driver);}
     public MessagePage messagePage() {return  new MessagePage(driver);}
