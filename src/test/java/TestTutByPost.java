@@ -1,20 +1,13 @@
 import TutByPostPages.TutByPost;
 import org.junit.Ignore;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.net.UrlChecker;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Кемко on 14.03.2017.
@@ -61,6 +54,4 @@ public class TestTutByPost {
         tutByPost.messagePage().clickSendButton();
         Assert.assertTrue(tutByPost.messagePage().notificationMessage.isDisplayed());
     }
-
-
 }
