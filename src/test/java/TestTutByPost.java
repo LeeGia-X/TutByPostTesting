@@ -35,7 +35,6 @@ public class TestTutByPost {
         driver.get(prop.getProperty("url"));
         Assert.assertTrue(driver.getTitle().contains("TUT.BY | ВАША ПОЧТА ТУТ | Вход"));
         tutByPost.authorizationPagePage().mailAvtorization(prop.getProperty("username"),prop.getProperty("password"));
-
     }
 
     @Ignore
@@ -46,7 +45,7 @@ public class TestTutByPost {
         Assert.assertTrue(tutByPost.messagePage().notificationMessage.isDisplayed());
     }
 
-    @Test
+    @Ignore
     public void createDraft() {
         tutByPost.mainPostPage().clickWriteLetterButton();
         tutByPost.messagePage().letterWriting("lee_x@mail.ru", "Test","TestTutBy");
