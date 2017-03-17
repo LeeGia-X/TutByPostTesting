@@ -31,7 +31,7 @@ public class MessagePage {
     public WebElement notificationMessage;
 
     @FindBy(css = "div[title='Закрыть']")
-    private WebElement closeMessageButton;
+    private WebElement messageCloseButton;
 
     @FindBy(css = "div[class='_nb-popup-i']")
     public WebElement confirmationWindow;
@@ -69,8 +69,8 @@ public class MessagePage {
         sendButton.click();
     }
 
-    public void clickCloseMessageButton(){
-        closeMessageButton.click();
+    public void clickMessageCloseButton(){
+        messageCloseButton.click();
     }
 
     public void clickSaveButton(){
