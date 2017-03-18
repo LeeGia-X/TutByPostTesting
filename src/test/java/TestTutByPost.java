@@ -9,9 +9,7 @@ import org.testng.annotations.Test;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-
 import org.apache.log4j.Logger;
-
 
 
 /**
@@ -43,19 +41,7 @@ public class TestTutByPost {
         tutByPost.authorizationPagePage().mailAvtorization(prop.getProperty("username"),prop.getProperty("password"));
     }
 
-    @Ignore
-    public void sendLetter() {
-        log.info("Start test #1");
-        tutByPost.mainPostPage().clickWriteLetterButton();
-        log.info("Fill fields (email, subject, message).");
-        tutByPost.messagePage().letterWriting("lee_x@mail.ru", "Test","TestTutBy");
-        log.info("Click send button.");
-        tutByPost.messagePage().clickSendButton();
-        log.info("Check if notification message is displayed.");
-        Assert.assertTrue(tutByPost.messagePage().notificationMessage.isDisplayed());
-    }
-
-    @Ignore
+    @Test
     public void createDraft() {
         log.info("Start test #2");
         tutByPost.mainPostPage().clickWriteLetterButton();
@@ -82,12 +68,25 @@ public class TestTutByPost {
         Assert.assertTrue(tutByPost.messagePage().notificationMessage.isDisplayed(),"The letter is sent");
     }
 
+    @Test
+    public void sendLetter() {
+        log.info("Start test #1");
+        tutByPost.mainPostPage().clickWriteLetterButton();
+        log.info("Fill fields (email, subject, message).");
+        tutByPost.messagePage().letterWriting("lee_x@mail.ru", "Test","TestTutBy");
+        log.info("Click send button.");
+        tutByPost.messagePage().clickSendButton();
+        log.info("Check if notification message is displayed.");
+        Assert.assertTrue(tutByPost.messagePage().notificationMessage.isDisplayed());
+    }
+
     @AfterTest
     public void tearDown() {
-        //if (driver != null)
-        //    driver.quit();
+        if (driver != null)
+            driver.quit();
         log.info("Browser closed");
     }
+
 
 
 
